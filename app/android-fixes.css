@@ -1,0 +1,82 @@
+/* Minimal, scoped Android-specific fixes to avoid layout divergence */
+
+/* Ensure full-height body on Android WebKit browsers */
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent input zoom on Android when focusing text fields */
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
+
+/* Improve tap behavior without affecting layout */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe-area padding removed to allow full-width navbar on mobile */
+/* If needed for devices with notches, apply padding to inner content instead of nav element */
+/* Fix for Android text selection */
+::selection {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+
+/* Critical: Prevent text overlap on Android */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  /* Remove any fixed heights that cause overflow */
+  min-height: auto;
+  /* Ensure proper text wrapping */
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Android-specific fix for Anton font rendering */
+.font-anton {
+  font-family: var(--font-anton), "Impact", "Arial Black", sans-serif;
+  letter-spacing: 0;
+  word-spacing: normal;
+  line-height: 1.2;
+  font-weight: 400;
+  /* Ensure font loads properly on Android */
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent fixed dimensions from causing text overlap on mobile */
+/* Exclude nav, form inputs, buttons, and layout containers to preserve component layouts */
+@media only screen and (max-width: 768px) {
+  /* Only target text elements, exclude all layout/interactive elements */
+  [class*="w-["]:not(nav):not(nav *):not(input):not(textarea):not(select):not(button):not([class*="relative"]):not([class*="absolute"]):not([class*="flex"]):not([class*="grid"]),
+  [class*="h-["]:not(nav):not(nav *):not(input):not(textarea):not(select):not(button):not([class*="relative"]):not([class*="absolute"]):not([class*="flex"]):not([class*="grid"]) {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100%;
+  }
+
+  /* Allow responsive text sizing */
+  h1:not(nav *), h2:not(nav *), h3:not(nav *) {
+    width: 100% !important;
+    height: auto !important;
+  }
+}

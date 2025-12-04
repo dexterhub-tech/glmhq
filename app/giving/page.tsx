@@ -1,20 +1,34 @@
 "use client";
 
 import { useState } from "react";
-
+import Image from "next/image";
 
 import auxanoHeader from "../assets/images/auxano_centers_header.png";
+import firstbankLogo from "../assets/images/firstbank.svg";
 
 export default function GivingPage() {
     const [activeTab, setActiveTab] = useState<"naira" | "foreign">("naira");
+    const [copiedText, setCopiedText] = useState<string | null>(null);
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
-        // You could add a toast notification here
+        setCopiedText(text);
+        setTimeout(() => setCopiedText(null), 2000); // Hide after 2 seconds
     };
 
     return (
         <div className="min-h-screen bg-white">
+            {/* Copy Success Toast */}
+            {copiedText && (
+                <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-pulse">
+                    <div className="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="font-semibold">Copied to clipboard!</span>
+                    </div>
+                </div>
+            )}
             {/* Hero Section */}
             <section className="relative w-full h-[400px] md:h-[500px] pt-[72px]">
                 {/* Background Image */}
@@ -84,10 +98,7 @@ export default function GivingPage() {
                                         </h3>
                                         <div className="mb-3">
                                             <div className="flex items-center gap-2 text-sm text-gray-700 mb-2">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                                                </svg>
+                                                <Image src={firstbankLogo} alt="First Bank" width={20} height={20} />
                                                 <span className="font-semibold">FIRST BANK OF NIGERIA</span>
                                             </div>
                                         </div>
@@ -113,10 +124,7 @@ export default function GivingPage() {
                                         </h3>
                                         <div className="mb-3">
                                             <div className="flex items-center gap-2 text-sm text-gray-700 mb-2">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                                                </svg>
+                                                <Image src={firstbankLogo} alt="First Bank" width={20} height={20} />
                                                 <span className="font-semibold">FIRST BANK OF NIGERIA</span>
                                             </div>
                                         </div>
@@ -141,10 +149,7 @@ export default function GivingPage() {
                                 <div className="bg-gray-100 rounded-lg p-6 shadow-md">
                                     <div className="mb-6">
                                         <div className="flex items-center gap-2 text-sm text-gray-700 mb-4">
-                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                                <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                                            </svg>
+                                            <Image src={firstbankLogo} alt="First Bank" width={24} height={24} />
                                             <span className="font-bold text-base">FIRST BANK OF NIGERIA</span>
                                         </div>
 

@@ -8,45 +8,51 @@ export default function AuxanoCentersPage() {
     const centers = [
         {
             name: "EKITI STATE UNIVERSITY (EKSU)",
-            location: "lle-Eye Lecture Theatre, Ekiti State University, Ado-Ekiti, Nigeria",
+            location: "PTP 4, Beside Ile-Eye, Ekiti State University, Ado-Ekiti, Nigeria",
             schedule: "Mondays & Thursdays",
             time: "5PM",
-            image: eksuImage
+            image: eksuImage,
+            phone: "+234 703 251 1051" // Add phone number here
         },
         {
             name: "FEDERAL POLYTECHNIC ADO-EKITI (MAIN CAMPUS)",
             location: "A2-005, Old SBS Building, Federal Polytechnic Main Campus, Ado-Ekiti, Nigeria",
             schedule: "Sundays: 4PM || Thursdays: ",
             time: "5PM",
-            image: fpadoImage
+            image: fpadoImage,
+            phone: "+234 806 072 8385" // Add phone number here
         },
         {
             name: "CORPER'S MISSION",
             location: "Ekiti Parapo Pavilion, New Iyin Road (Bank Road), Ado-Ekiti, Nigeria",
             schedule: "Tuesdays, Wednesdays, Thursdays",
             time: "8:45AM",
-            image: corpersImage
+            image: corpersImage,
+            phone: "+234 806 080 8831" // Add phone number here
         },
         {
             name: "COLLEGE OF NURSING (CONAD)",
             location: "The-Rock Tutorial Center, Beside SLOT, Adebayo, Ado-Ekiti, Nigeria.",
             schedule: "Thursdays",
             time: "5PM",
-            image: eksuImage
+            image: eksuImage,
+            phone: "+234 706 273 7144" // Add phone number here
         },
         {
             name: "FEDERAL UNIVERSITY OYE (IDO CAMPUS)",
             location: "Newly opened Lecture Hall 2, FUOYE, Ido Campus, Ido-Ekiti, Nigeria",
             schedule: "Mondays & Thursdays",
             time: "4:30PM",
-            image: eksuImage
+            image: eksuImage,
+            phone: "+234 703 683 5452" // Add phone number here
         },
         {
             name: "ADO-EKITI TOWNSHIP",
             location: "Upper Room (GLM Auditorium), Off Housing Road, Olora Layout, Adebayo, Ado Ekiti.",
             schedule: "Sundays",
             time: "8:00AM",
-            image: eksuImage
+            image: eksuImage,
+            phone: "+2349038018023" // Add phone number here
         }
     ];
 
@@ -142,7 +148,10 @@ export default function AuxanoCentersPage() {
                                     </div>
 
                                     {/* Ask for Directions Button */}
-                                    <button className="w-3/5 md:w-auto flex items-center justify-center gap-2 bg-white border-2 border-black text-black font-semibold py-2.5 px-4 rounded-full hover:bg-black hover:text-white transition-colors duration-200 whitespace-nowrap">
+                                    <a
+                                        href={`tel:${center.phone}`}
+                                        className="w-fit lg:w-1/2 inline-flex items-center justify-center gap-2 bg-white border-2 border-black text-black font-semibold py-2.5 px-4 rounded-full hover:bg-black hover:text-white transition-colors duration-200 whitespace-nowrap"
+                                    >
                                         <svg
                                             className="w-4 h-4 flex-shrink-0"
                                             fill="currentColor"
@@ -151,7 +160,7 @@ export default function AuxanoCentersPage() {
                                             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                         </svg>
                                         <span className="text-sm">Ask for directions</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         ))}

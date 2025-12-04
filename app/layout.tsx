@@ -10,7 +10,7 @@ import VersionChecker from "./components/VersionChecker";
 import { anton, inter, bigShouldersDisplay } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "GLM HQ",
+  title: "GLM | Gospel Labour Ministry.",
   description: "Apostle Joseph Ibrahim Gospel Labour Ministry Homepage",
   manifest: "/manifest.json",
   appleWebApp: {

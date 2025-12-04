@@ -89,12 +89,12 @@ const NavBar = () => {
 
                         <DialogContent
                             showCloseButton={false}
-                            className="bg-[#181818] border-none p-0 !top-0 !left-0 !translate-x-0 !translate-y-0 !w-full !max-w-full !h-screen !max-h-screen !rounded-none !shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left"
+                            className="bg-[#181818] border-none p-0 !top-0 !left-0 !translate-x-0 !translate-y-0 !w-full !max-w-full !h-dvh !max-h-dvh !rounded-none !shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left overflow-hidden"
                         >
                             <VisuallyHidden>
                                 <DialogTitle>Navigation Menu</DialogTitle>
                             </VisuallyHidden>
-                            <div className="flex flex-col h-full overflow-y-auto px-6 py-6">
+                            <div className="flex flex-col h-full overflow-hidden px-6 py-6">
                                 {/* Header with Logo and Close Button */}
                                 <div className="flex items-start justify-between mb-8 flex-shrink-0">
                                     <Link href="/" className="cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>

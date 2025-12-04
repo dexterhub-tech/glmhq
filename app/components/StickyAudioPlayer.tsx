@@ -120,87 +120,17 @@ export default function StickyAudioPlayer() {
         {isPlaying ? `Playing ${currentMessage.title}` : `Paused ${currentMessage.title}`}
       </div>
       
-      <div className="max-w-7xl mx-auto px-3 py-2 md:px-4 md:py-4">
-        <div className="flex flex-col gap-2 md:gap-2">
-          {/* Top Row: Message Info and Controls */}
-          <div className="flex items-center gap-2 md:gap-4">
-            {/* Message Thumbnail - Smaller on mobile for more control space */}
-            <div className="relative w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded overflow-hidden bg-gray-100">
-              <Image
-                src={currentMessage.image}
-                alt={`${currentMessage.title} thumbnail`}
-                fill
-                sizes="(max-width: 768px) 44px, 64px"
-                className="object-cover"
-              />
-            </div>
-
-            {/* Message Information */}
+      <div className="max-w-7xl mx-auto px-3 py-3 md:px-4 md:py-4">
+        <div className="flex flex-col gap-3">
+          {/* Top Section: Message Title and Close Button */}
+          <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0" aria-label="Now playing">
-              <h3 className="font-anton text-sm md:text-base text-black truncate" id="player-title">
+              <h3 className="font-anton text-base md:text-lg text-black" id="player-title">
                 {currentMessage.title}
               </h3>
-              <p className="font-satoshi text-xs md:text-sm text-gray-600 truncate" id="player-preacher">
+              <p className="font-satoshi text-sm md:text-base text-gray-600 mt-1" id="player-preacher">
                 {isLoading ? 'Loading...' : error ? error : currentMessage.preacher}
               </p>
-            </div>
-
-            {/* Playback Controls */}
-            <div className="flex items-center gap-0.5 md:gap-2 flex-shrink-0">
-              {/* Skip Backward Button - Minimum 44x44px touch target */}
-              <button
-                onClick={skipBackward}
-                disabled={isLoading || !!error}
-                className="w-11 h-11 md:w-10 md:h-10 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                aria-label="Skip backward 10 seconds"
-                title="Skip backward 10 seconds"
-              >
-                <SkipBack className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-              </button>
-
-              {/* Play/Pause Button - Larger touch target on mobile */}
-              <button
-                onClick={togglePlayPause}
-                disabled={isLoading || !!error}
-                className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-white bg-black hover:bg-gray-800 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                aria-label={isPlaying ? 'Pause' : 'Play'}
-                aria-pressed={isPlaying}
-                title={isPlaying ? 'Pause' : 'Play'}
-              >
-                {isLoading ? (
-                  <div className="w-5 h-5 md:w-6 md:h-6 border-2 border-white border-t-transparent rounded-full animate-spin" aria-label="Loading" />
-                ) : isPlaying ? (
-                  <Pause className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" aria-hidden="true" />
-                ) : (
-                  <Play className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" aria-hidden="true" />
-                )}
-              </button>
-
-              {/* Skip Forward Button - Minimum 44x44px touch target */}
-              <button
-                onClick={skipForward}
-                disabled={isLoading || !!error}
-                className="w-11 h-11 md:w-10 md:h-10 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                aria-label="Skip forward 10 seconds"
-                title="Skip forward 10 seconds"
-              >
-                <SkipForward className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-              </button>
-
-              {/* Download Button - Minimum 44x44px touch target */}
-              <a
-                href={currentMessage.audioUrl}
-                download={`${currentMessage.title} - ${currentMessage.preacher}.mp3`}
-                className="w-11 h-11 md:w-10 md:h-10 flex items-center justify-center text-green-600 hover:text-green-700 hover:bg-green-50 rounded-full transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
-                aria-label={`Download ${currentMessage.title}`}
-                title="Download message"
-                onClick={(e) => {
-                  // Prevent default behavior that might interfere with playback
-                  e.stopPropagation();
-                }}
-              >
-                <Download className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-              </a>
             </div>
 
             {/* Close Button - Minimum 44x44px touch target */}
@@ -212,6 +142,64 @@ export default function StickyAudioPlayer() {
             >
               <X className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
             </button>
+          </div>
+
+          {/* Middle Section: Playback Controls */}
+          <div className="flex items-center justify-center gap-2 md:gap-3">
+            {/* Skip Backward Button - Minimum 44x44px touch target */}
+            <button
+              onClick={skipBackward}
+              disabled={isLoading || !!error}
+              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              aria-label="Skip backward 10 seconds"
+              title="Skip backward 10 seconds"
+            >
+              <SkipBack className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+            </button>
+
+            {/* Play/Pause Button - Larger touch target */}
+            <button
+              onClick={togglePlayPause}
+              disabled={isLoading || !!error}
+              className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center text-white bg-black hover:bg-gray-800 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              aria-label={isPlaying ? 'Pause' : 'Play'}
+              aria-pressed={isPlaying}
+              title={isPlaying ? 'Pause' : 'Play'}
+            >
+              {isLoading ? (
+                <div className="w-6 h-6 md:w-7 md:h-7 border-2 border-white border-t-transparent rounded-full animate-spin" aria-label="Loading" />
+              ) : isPlaying ? (
+                <Pause className="w-6 h-6 md:w-7 md:h-7" fill="currentColor" aria-hidden="true" />
+              ) : (
+                <Play className="w-6 h-6 md:w-7 md:h-7" fill="currentColor" aria-hidden="true" />
+              )}
+            </button>
+
+            {/* Skip Forward Button - Minimum 44x44px touch target */}
+            <button
+              onClick={skipForward}
+              disabled={isLoading || !!error}
+              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              aria-label="Skip forward 10 seconds"
+              title="Skip forward 10 seconds"
+            >
+              <SkipForward className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+            </button>
+
+            {/* Download Button - Minimum 44x44px touch target */}
+            <a
+              href={currentMessage.audioUrl}
+              download={`${currentMessage.title} - ${currentMessage.preacher}.mp3`}
+              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-green-600 hover:text-green-700 hover:bg-green-50 rounded-full transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+              aria-label={`Download ${currentMessage.title}`}
+              title="Download message"
+              onClick={(e) => {
+                // Prevent default behavior that might interfere with playback
+                e.stopPropagation();
+              }}
+            >
+              <Download className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+            </a>
           </div>
 
           {/* Bottom Row: Progress Bar and Time Display */}

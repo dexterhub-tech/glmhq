@@ -1,9 +1,12 @@
+'use client';
+
 import Image from "next/image";
-import Link from "next/link";
 import { Search, Download, Play } from "lucide-react";
 import { messages } from "../constants/messages";
+import { useAudioPlayer } from "../contexts/AudioPlayerContext";
 
 export default function RecentMessagesSection() {
+  const { playMessage } = useAudioPlayer();
   return (
     <section className="w-full bg-white py-6 sm:py-8 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1400px] mx-auto">
@@ -59,10 +62,13 @@ export default function RecentMessagesSection() {
                     <Download className="w-4 h-4" />
                     <span>DOWNLOAD</span>
                   </a>
-                  <Link href={`/messages/${message.id}`} className="flex-1 border-1 border-black text-black hover:bg-black hover:text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm">
-                    <Play className="w-4 h-4 fill-black" />
+                  <button
+                    onClick={() => playMessage(message)}
+                    className="flex-1 border-1 border-black text-black hover:bg-black hover:text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm"
+                  >
+                    <Play className="w-4 h-4 fill-current" />
                     <span>PLAY</span>
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

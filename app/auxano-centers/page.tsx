@@ -16,7 +16,7 @@ export default function AuxanoCentersPage() {
         },
         {
             name: "FEDERAL POLYTECHNIC ADO-EKITI (MAIN CAMPUS)",
-            location: "A2-005, Old SBS Building, Federal Polytechnic Main Campus, Ado-Ekiti, Nigeria",
+            location: "A003, OLD SBS Building, Federal Polytechnic Main Campus, Ado-Ekiti, Nigeria",
             schedule: "Sundays: 4PM || Thursdays: ",
             time: "5PM",
             image: fpadoImage,
@@ -32,7 +32,7 @@ export default function AuxanoCentersPage() {
         },
         {
             name: "COLLEGE OF NURSING (CONAD)",
-            location: "The-Rock Tutorial Center, Beside SLOT, Adebayo, Ado-Ekiti, Nigeria.",
+            location: "D-Rock Tutorial Center, Behind SLOT, Adebayo, Ado-Ekiti, Nigeria.",
             schedule: "Thursdays",
             time: "5PM",
             image: eksuImage,

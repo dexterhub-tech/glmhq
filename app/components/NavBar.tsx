@@ -116,7 +116,7 @@ const NavBar = () => {
                                     {MOBILE_NAV_LINKS.map(link => (
                                         <li key={link.label}>
                                             <Link
-                                                className="text-white font-anton text-[48px] font-normal block leading-tight"
+                                                className="text-white font-anton text-[38px] font-normal block leading-tight"
                                                 href={link.href}
                                                 onClick={() => setIsMobileMenuOpen(false)}
                                             >

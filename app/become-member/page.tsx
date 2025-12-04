@@ -21,16 +21,16 @@ export default function BecomeMemberPage() {
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-white"></div>
 
         {/* Form Card - Overlays both sections */}
-        <div className="relative z-10 min-h-[calc(100vh-72px)] flex items-center justify-center px-4 py-8 md:py-12">
+        <div className="relative z-10 min-h-[calc(100vh-72px)] flex items-center justify-center px-4 py-8 md:py-10">
           <div className="max-4xl-mx-auto">
-            <div className="bg-white border-1 border-black rounded-2xl shadow-2xl w-full max-w-lg p-8 md:p-10">
+            <div className="bg-white border-1 border-black rounded-2xl shadow-2xl w-full max-w-lg p-6 md:p-6">
               {/* Title */}
               <h1 className="text-3xl md:text-[24px] font-anton font-bold text-black mb-8 text-center">
                 Become A Member
               </h1>
 
               {/* Form */}
-              <form className="space-y-5 mb-8">
+              <form className="space-y-5 mb-4">
                 {/* Full Name Input */}
                 <div>
                   <label className="block text-sm text-gray-600 mb-1.5">Full name</label>
@@ -38,7 +38,7 @@ export default function BecomeMemberPage() {
                     id="fullName"
                     type="text"
                     placeholder="Full name"
-                    className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
+                    className="w-full px-4 py-2 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -49,7 +49,7 @@ export default function BecomeMemberPage() {
                     id="phoneNumber"
                     type="tel"
                     placeholder="Phone number"
-                    className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
+                    className="w-full px-4 py-2 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -59,7 +59,7 @@ export default function BecomeMemberPage() {
                   <input
                     type="email"
                     placeholder="Email address"
-                    className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
+                    className="w-full px-4 py-2 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -70,7 +70,7 @@ export default function BecomeMemberPage() {
                     id="address"
                     type="text"
                     placeholder="Current address"
-                    className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
+                    className="w-full px-4 py-2 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -81,7 +81,7 @@ export default function BecomeMemberPage() {
                     <input
                       type="text"
                       placeholder="Occupation"
-                      className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-gray-300 focus:bg-white transition-colors"
+                      className="w-full px-4 py-2 rounded-md border border-gray-200 bg-gray-50 text-black placeholder-gray-400 text-sm focus:outline-none focus:border-black focus:bg-white transition-colors"
                     />
                     {/* CAPTCHA Badge */}
 

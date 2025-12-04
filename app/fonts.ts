@@ -1,4 +1,4 @@
-import { Anton, Inter, Big_Shoulders_Display } from 'next/font/google'
+import { Anton, Inter } from 'next/font/google'
 
 export const anton = Anton({
   weight: '400',
@@ -13,9 +13,10 @@ export const inter = Inter({
   variable: '--font-inter',
 })
 
-export const bigShouldersDisplay = Big_Shoulders_Display({
-  weight: ['700'],
-  subsets: ['latin'],
-  display: 'swap',
+// Big Shoulders Display - loaded via Google Fonts CDN in layout.tsx
+// This approach is used for compatibility with Next.js 15.5+
+export const bigShouldersDisplay = {
   variable: '--font-big-shoulders',
-})
+  className: '',
+}
+

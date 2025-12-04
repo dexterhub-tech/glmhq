@@ -24,7 +24,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and notify clients
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -37,6 +37,13 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      // After cleaning up caches, notify all clients to reload
+      return self.clients.matchAll({ type: 'window' }).then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ type: 'RELOAD_PAGE' });
+        });
+      });
     })
   );
   // Take control of all pages immediately

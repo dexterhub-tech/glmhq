@@ -120,170 +120,121 @@ export default function StickyAudioPlayer() {
         {isPlaying ? `Playing ${currentMessage.title}` : `Paused ${currentMessage.title}`}
       </div>
       
-      <div className="max-w-7xl mx-auto px-3 py-3 md:px-4 md:py-4">
-        <div className="flex flex-col gap-3">
-          {/* Top Section: Message Title and Close Button */}
-          <div className="flex items-start justify-between gap-2">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex flex-col gap-4">
+          {/* Top Section: Thumbnail and Message Info */}
+          <div className="flex items-start gap-4">
+            {/* Message Thumbnail */}
+            <div className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+              <Image
+                src={currentMessage.image}
+                alt={`${currentMessage.title} thumbnail`}
+                fill
+                sizes="(max-width: 768px) 80px, 96px"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Message Information */}
             <div className="flex-1 min-w-0" aria-label="Now playing">
-              <h3 className="font-anton text-base md:text-lg text-black" id="player-title">
+              <h3 className="font-anton text-xl md:text-2xl text-black leading-tight" id="player-title">
                 {currentMessage.title}
               </h3>
-              <p className="font-satoshi text-sm md:text-base text-gray-600 mt-1" id="player-preacher">
+              <p className="font-satoshi text-base md:text-lg text-gray-600 mt-1" id="player-preacher">
                 {isLoading ? 'Loading...' : error ? error : currentMessage.preacher}
               </p>
             </div>
 
-            {/* Close Button - Minimum 44x44px touch target */}
+            {/* Close Button - Top right */}
             <button
               onClick={closePlayer}
-              className="flex-shrink-0 w-11 h-11 md:w-10 md:h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+              className="flex-shrink-0 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
               aria-label="Close player"
               title="Close player"
             >
-              <X className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+              <X className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
 
-          {/* Middle Section: Playback Controls */}
-          <div className="flex items-center justify-center gap-2 md:gap-3">
-            {/* Skip Backward Button - Minimum 44x44px touch target */}
+          {/* Progress Bar - Full width */}
+          <div className="w-full">
+            <input
+              type="range"
+              min="0"
+              max={duration || 0}
+              value={currentTime}
+              onChange={handleProgressChange}
+              disabled={isLoading || !!error}
+              className="w-full h-2 bg-gray-300 rounded-full appearance-none cursor-pointer progress-bar disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+              aria-label="Seek audio position"
+              aria-valuemin={0}
+              aria-valuemax={duration || 0}
+              aria-valuenow={currentTime}
+              aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
+              role="slider"
+              tabIndex={0}
+              title="Seek audio position"
+              style={{
+                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${duration > 0 ? (currentTime / duration) * 100 : 0}%, #d1d5db ${duration > 0 ? (currentTime / duration) * 100 : 0}%, #d1d5db 100%)`
+              }}
+            />
+          </div>
+
+          {/* Bottom Section: Playback Controls */}
+          <div className="flex items-center justify-center gap-8 md:gap-12">
+            {/* Skip Backward Button */}
             <button
               onClick={skipBackward}
               disabled={isLoading || !!error}
-              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-gray-600 hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               aria-label="Skip backward 10 seconds"
               title="Skip backward 10 seconds"
             >
-              <SkipBack className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+              <SkipBack className="w-8 h-8 md:w-10 md:h-10" aria-hidden="true" />
             </button>
 
-            {/* Play/Pause Button - Larger touch target */}
+            {/* Play/Pause Button */}
             <button
               onClick={togglePlayPause}
               disabled={isLoading || !!error}
-              className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center text-white bg-black hover:bg-gray-800 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-black hover:text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               aria-label={isPlaying ? 'Pause' : 'Play'}
               aria-pressed={isPlaying}
               title={isPlaying ? 'Pause' : 'Play'}
             >
               {isLoading ? (
-                <div className="w-6 h-6 md:w-7 md:h-7 border-2 border-white border-t-transparent rounded-full animate-spin" aria-label="Loading" />
+                <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-black border-t-transparent rounded-full animate-spin" aria-label="Loading" />
               ) : isPlaying ? (
-                <Pause className="w-6 h-6 md:w-7 md:h-7" fill="currentColor" aria-hidden="true" />
+                <Pause className="w-10 h-10 md:w-12 md:h-12" fill="currentColor" aria-hidden="true" />
               ) : (
-                <Play className="w-6 h-6 md:w-7 md:h-7" fill="currentColor" aria-hidden="true" />
+                <Play className="w-10 h-10 md:w-12 md:h-12" fill="currentColor" aria-hidden="true" />
               )}
             </button>
 
-            {/* Skip Forward Button - Minimum 44x44px touch target */}
+            {/* Skip Forward Button */}
             <button
               onClick={skipForward}
               disabled={isLoading || !!error}
-              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-gray-600 hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               aria-label="Skip forward 10 seconds"
               title="Skip forward 10 seconds"
             >
-              <SkipForward className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+              <SkipForward className="w-8 h-8 md:w-10 md:h-10" aria-hidden="true" />
             </button>
 
-            {/* Download Button - Minimum 44x44px touch target */}
+            {/* Download Button */}
             <a
               href={currentMessage.audioUrl}
               download={`${currentMessage.title} - ${currentMessage.preacher}.mp3`}
-              className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-green-600 hover:text-green-700 hover:bg-green-50 rounded-full transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-gray-600 hover:text-black transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               aria-label={`Download ${currentMessage.title}`}
               title="Download message"
               onClick={(e) => {
-                // Prevent default behavior that might interfere with playback
                 e.stopPropagation();
               }}
             >
-              <Download className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+              <Download className="w-8 h-8 md:w-10 md:h-10" aria-hidden="true" />
             </a>
-          </div>
-
-          {/* Bottom Row: Progress Bar and Time Display */}
-          <div className="flex items-center gap-1.5 md:gap-3">
-            {/* Current Time */}
-            <span 
-              className="font-satoshi text-xs text-gray-600 flex-shrink-0 w-9 md:w-10 text-right"
-              aria-label="Current time"
-              role="timer"
-            >
-              {formatTime(currentTime)}
-            </span>
-
-            {/* Progress Bar - Larger touch target on mobile */}
-            <div className="flex-1 relative">
-              <input
-                type="range"
-                min="0"
-                max={duration || 0}
-                value={currentTime}
-                onChange={handleProgressChange}
-                disabled={isLoading || !!error}
-                className="w-full h-2 md:h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer progress-bar disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
-                aria-label="Seek audio position"
-                aria-valuemin={0}
-                aria-valuemax={duration || 0}
-                aria-valuenow={currentTime}
-                aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
-                role="slider"
-                tabIndex={0}
-                title="Seek audio position"
-                style={{
-                  background: `linear-gradient(to right, #000 0%, #000 ${duration > 0 ? (currentTime / duration) * 100 : 0}%, #e5e7eb ${duration > 0 ? (currentTime / duration) * 100 : 0}%, #e5e7eb 100%)`
-                }}
-              />
-            </div>
-
-            {/* Total Duration */}
-            <span 
-              className="font-satoshi text-xs text-gray-600 flex-shrink-0 w-9 md:w-10"
-              aria-label="Total duration"
-            >
-              {formatTime(duration)}
-            </span>
-
-            {/* Volume Control - Hidden on mobile, visible on desktop */}
-            <div className="hidden md:flex items-center gap-2 flex-shrink-0 ml-2">
-              {/* Mute/Unmute Button */}
-              <button
-                onClick={toggleMute}
-                className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                aria-label={isMuted ? 'Unmute' : 'Mute'}
-                aria-pressed={isMuted}
-                title={isMuted ? 'Unmute' : 'Mute'}
-              >
-                {isMuted || volume === 0 ? (
-                  <VolumeX className="w-5 h-5" aria-hidden="true" />
-                ) : (
-                  <Volume2 className="w-5 h-5" aria-hidden="true" />
-                )}
-              </button>
-
-              {/* Volume Slider */}
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={handleVolumeSliderChange}
-                className="w-20 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer volume-slider"
-                aria-label="Adjust volume"
-                aria-valuemin={0}
-                aria-valuemax={1}
-                aria-valuenow={volume}
-                aria-valuetext={`Volume ${Math.round(volume * 100)}%`}
-                role="slider"
-                tabIndex={0}
-                title="Adjust volume"
-                style={{
-                  background: `linear-gradient(to right, #000 0%, #000 ${volume * 100}%, #e5e7eb ${volume * 100}%, #e5e7eb 100%)`
-                }}
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -302,47 +253,35 @@ export default function StickyAudioPlayer() {
           border-width: 0;
         }
 
-        /* Progress bar thumb - Larger on mobile for better touch interaction */
+        /* Progress bar thumb - Blue to match the design */
         .progress-bar::-webkit-slider-thumb {
           appearance: none;
-          width: 16px;
-          height: 16px;
+          width: 18px;
+          height: 18px;
           border-radius: 50%;
-          background: #000;
+          background: #3b82f6;
           cursor: pointer;
           transition: transform 0.2s;
-        }
-
-        @media (min-width: 768px) {
-          .progress-bar::-webkit-slider-thumb {
-            width: 12px;
-            height: 12px;
-          }
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .progress-bar::-webkit-slider-thumb:hover {
-          transform: scale(1.2);
+          transform: scale(1.15);
         }
 
         .progress-bar::-moz-range-thumb {
-          width: 16px;
-          height: 16px;
+          width: 18px;
+          height: 18px;
           border-radius: 50%;
-          background: #000;
+          background: #3b82f6;
           cursor: pointer;
           border: none;
           transition: transform 0.2s;
-        }
-
-        @media (min-width: 768px) {
-          .progress-bar::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-          }
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .progress-bar::-moz-range-thumb:hover {
-          transform: scale(1.2);
+          transform: scale(1.15);
         }
 
         /* Volume slider thumb */

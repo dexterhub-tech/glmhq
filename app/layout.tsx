@@ -28,6 +28,28 @@ export const metadata: Metadata = {
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
   },
+  openGraph: {
+    title: "GLM | Gospel Labour Ministry.",
+    description: "Apostle Joseph Ibrahim Gospel Labour Ministry Homepage",
+    url: "https://glmhq.vercel.app",
+    siteName: "Gospel Labour Ministry",
+    images: [
+      {
+        url: "/glmhq_prev.png",
+        width: 1200,
+        height: 630,
+        alt: "Gospel Labour Ministry Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GLM | Gospel Labour Ministry.",
+    description: "Apostle Joseph Ibrahim Gospel Labour Ministry Homepage",
+    images: ["/glmhq_prev.png"],
+  },
 };
 
 export const viewport: Viewport = {

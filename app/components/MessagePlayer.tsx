@@ -4,8 +4,11 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Play, Pause, SkipBack, SkipForward, Download, ChevronLeft, Volume2, VolumeX } from "lucide-react";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 interface Message {
+    driveLink: string | undefined;
+    thumbnail: string | StaticImport;
     id: number;
     title: string;
     preacher: string;
@@ -100,7 +103,7 @@ export default function MessagePlayer({ message }: { message: Message }) {
                     {/* Artwork */}
                     <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:h-[400px] bg-gray-100">
                         <Image
-                            src={message.image}
+                            src={message.thumbnail}
                             alt={message.title}
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
@@ -179,7 +182,7 @@ export default function MessagePlayer({ message }: { message: Message }) {
                                 </div>
 
                                 <a
-                                    href={message.audioUrl}
+                                    href={message.driveLink}
                                     download
                                     className="flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold text-sm transition-colors bg-green-50 px-4 py-2 rounded-full"
                                 >

@@ -5,16 +5,19 @@ import { StaticImageData } from 'next/image';
 
 // Message interface matching the existing structure
 export interface Message {
+  driveLink: string | undefined;
+
   id: number;
   title: string;
   preacher: string;
   date: string;
-  image: string | StaticImageData;
+  thumbnail: string | StaticImageData | { src: string; height: number; width: number; blurDataURL?: string; };
   audioUrl: string;
 }
 
 // Context type definition
 export interface AudioPlayerContextType {
+  messages: Message[];
   currentMessage: Message | null;
   isPlaying: boolean;
   isPlayerVisible: boolean;
@@ -42,8 +45,12 @@ interface AudioPlayerProviderProps {
   children: ReactNode;
 }
 
+const API_BASE = 'https://messagefetcher-script.onrender.com';
+// const API_BASE = 'http://localhost:2000';
+
 // Provider component
 export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [currentMessage, setCurrentMessage] = useState<Message | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
@@ -56,12 +63,39 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const previousVolumeRef = useRef<number>(1);
 
+  // Fetch messages
+  useEffect(() => {
+    async function fetchAudios() {
+      try {
+        const res = await fetch(`${API_BASE}/audios`);
+        const audios = await res.json();
+
+        if (audios.length > 0) {
+          const mappedMessages: Message[] = audios.map((audio: any, index: number) => ({
+            id: index + 1, // Generate a numeric ID
+            title: audio.title || 'Untitled',
+            preacher: 'Apostle Joseph Ibrahim', // Default preacher as it's not in API
+            date: new Date(audio.createdAt).toLocaleDateString(),
+            thumbnail: audio.thumbnail || 'https://via.placeholder.com/400', // Fallback image
+            audioUrl: audio.fileId ? `${API_BASE}/stream/${audio.fileId}` : '',
+            driveLink: audio.driveLink || '',
+          }));
+          setMessages(mappedMessages);
+        }
+      } catch (err) {
+        console.error('Failed to load audios:', err);
+      }
+    }
+
+    fetchAudios();
+  }, []);
+
   // Initialize audio element
   useEffect(() => {
     audioRef.current = new Audio();
-    
+
     const audio = audioRef.current;
-    
+
     // Set initial volume
     audio.volume = volume;
 
@@ -70,31 +104,31 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
       setIsPlaying(true);
       setIsLoading(false);
     };
-    
+
     const handlePause = () => setIsPlaying(false);
-    
+
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
     };
-    
+
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    
+
     const handleLoadedMetadata = () => {
       setDuration(audio.duration);
       setIsLoading(false);
       setError(null);
     };
-    
+
     const handleLoadStart = () => {
       setIsLoading(true);
       setError(null);
     };
-    
+
     const handleCanPlay = () => {
       setIsLoading(false);
     };
-    
+
     const handleError = () => {
       setIsLoading(false);
       setIsPlaying(false);
@@ -138,16 +172,16 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
       // Cancel any previous audio load in progress
       // Pausing and changing src will abort any pending load operations
       audio.pause();
-      
+
       // Reset current time before changing source to ensure clean state
       audio.currentTime = 0;
-      
+
       // Change the audio source - this cancels any pending load
       audio.src = message.audioUrl;
-      
+
       // Load the new audio explicitly to start the loading process
       audio.load();
-      
+
       // Update state to reflect the new message
       setCurrentMessage(message);
       setCurrentTime(0);
@@ -205,11 +239,11 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
     if (!audioRef.current) return;
 
     const audio = audioRef.current;
-    
+
     // Stop playback
     audio.pause();
     audio.currentTime = 0;
-    
+
     // Reset state
     setIsPlayerVisible(false);
     setIsPlaying(false);
@@ -235,10 +269,10 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
 
     const audio = audioRef.current;
     const clampedVolume = Math.max(0, Math.min(1, newVolume));
-    
+
     audio.volume = clampedVolume;
     setVolume(clampedVolume);
-    
+
     // If volume is set to 0, consider it muted
     if (clampedVolume === 0) {
       setIsMuted(true);
@@ -269,6 +303,7 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
   };
 
   const value: AudioPlayerContextType = {
+    messages,
     currentMessage,
     isPlaying,
     isPlayerVisible,
@@ -298,10 +333,10 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
 // Custom hook to use the audio player context
 export function useAudioPlayer() {
   const context = useContext(AudioPlayerContext);
-  
+
   if (context === undefined) {
     throw new Error('useAudioPlayer must be used within an AudioPlayerProvider');
   }
-  
+
   return context;
 }

@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { Search, Download, Play } from "lucide-react";
-import { messages } from "../constants/messages";
 import { useAudioPlayer } from "../contexts/AudioPlayerContext";
 
 export default function RecentMessagesSection() {
-  const { playMessage } = useAudioPlayer();
+  const { playMessage, messages } = useAudioPlayer();
+
   return (
     <section className="w-full bg-white py-6 sm:py-8 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1400px] mx-auto">
@@ -27,52 +27,65 @@ export default function RecentMessagesSection() {
 
         {/* Messages Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-6 xl:gap-8">
-          {messages.map((message) => (
-            <div key={message.id} className="bg-white rounded-xl shadow-lg overflow-hidden w-full">
-              {/* Banner Section - Using the healing meeting image */}
-              <div className="relative w-full h-[200px] sm:h-[220px] md:h-[240px] lg:h-[260px] xl:h-[280px] overflow-hidden bg-gray-100">
-                {/* Background Image */}
-                <Image
-                  src={message.image}
-                  alt="Message thumbnail"
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-center"
-                  priority={message.id <= 3}
-                />
-              </div>
+          {messages.length === 0 ? (
+            <div className="col-span-full text-center py-12 text-gray-500">
+              {/* You might want a loading state here if isLoading is exposed */}
+              <p>Loading messages...</p>
+            </div>
+          ) : (
+            messages.map((message) => (
+              <div key={message.id} className="bg-white rounded-xl shadow-lg overflow-hidden w-full">
+                {/* Banner Section - Using the healing meeting image */}
+                <div className="relative w-full h-[200px] sm:h-[220px] md:h-[240px] lg:h-[260px] xl:h-[280px] overflow-hidden bg-gray-100">
+                  {/* Background Image */}
+                  {/* Background Image */}
+                  {message.thumbnail ? (
+                    <Image
+                      src={message.thumbnail}
+                      alt="Message thumbnail"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center"
+                      priority={message.id <= 3}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <Play className="w-12 h-12 opacity-20" />
+                    </div>
+                  )}
+                </div>
 
-              {/* Message Details */}
-              <div className="p-4 sm:p-5 md:p-6 flex flex-col min-h-[160px] sm:min-h-[170px]">
-                <div className="flex-grow mb-4">
-                  <h4 className="font-anton font-normal text-base sm:text-lg md:text-xl text-black mb-2 leading-tight line-clamp-2">{message.title}</h4>
-                  <div className="flex justify-between items-center gap-2 mb-3">
-                    <span className="font-satoshi font-medium text-sm text-gray-600 truncate">{message.preacher}</span>
-                    <span className="font-satoshi font-medium text-sm text-gray-500 whitespace-nowrap">{message.date}</span>
+                {/* Message Details */}
+                <div className="p-4 sm:p-5 md:p-6 flex flex-col min-h-[160px] sm:min-h-[170px]">
+                  <div className="flex-grow mb-4">
+                    <h4 className="font-anton font-normal text-base sm:text-lg md:text-xl text-black mb-2 leading-tight line-clamp-2">{message.title}</h4>
+                    <div className="flex justify-between items-center gap-2 mb-3">
+                      <span className="font-satoshi font-medium text-sm text-gray-600 truncate">{message.preacher}</span>
+                      <span className="font-satoshi font-medium text-sm text-gray-500 whitespace-nowrap">{message.date}</span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-3 mt-auto">
+                    <a
+                      href={message.driveLink}
+                      download
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>DOWNLOAD</span>
+                    </a>
+                    <button
+                      onClick={() => playMessage(message)}
+                      className="flex-1 border-1 border-black text-black hover:bg-black hover:text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm"
+                    >
+                      <Play className="w-4 h-4 fill-current" />
+                      <span>PLAY</span>
+                    </button>
                   </div>
                 </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3 mt-auto">
-                  <a
-                    href={message.audioUrl}
-                    download
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>DOWNLOAD</span>
-                  </a>
-                  <button
-                    onClick={() => playMessage(message)}
-                    className="flex-1 border-1 border-black text-black hover:bg-black hover:text-white rounded-[50px] px-4 py-2.5 flex items-center justify-center gap-2 font-semibold transition-colors text-sm"
-                  >
-                    <Play className="w-4 h-4 fill-current" />
-                    <span>PLAY</span>
-                  </button>
-                </div>
               </div>
-            </div>
-          ))}
+            )))}
         </div>
       </div>
     </section>

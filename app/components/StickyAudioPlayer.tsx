@@ -2,23 +2,23 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { X, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Download } from 'lucide-react';
+import { X, Play, Pause, SkipBack, SkipForward, Download } from 'lucide-react';
 import { useAudioPlayer } from '@/app/contexts/AudioPlayerContext';
 
 export default function StickyAudioPlayer() {
-  const { 
-    currentMessage, 
-    isPlaying, 
-    isPlayerVisible, 
+  const {
+    currentMessage,
+    isPlaying,
+    isPlayerVisible,
     currentTime,
     duration,
     volume,
-    isMuted,
+
     isLoading,
     error,
-    togglePlayPause, 
-    skipBackward, 
-    skipForward, 
+    togglePlayPause,
+    skipBackward,
+    skipForward,
     closePlayer,
     handleSeek,
     handleVolumeChange,
@@ -30,7 +30,7 @@ export default function StickyAudioPlayer() {
     if (!isFinite(seconds) || isNaN(seconds)) {
       return '0:00';
     }
-    
+
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -42,11 +42,7 @@ export default function StickyAudioPlayer() {
     handleSeek(newTime);
   };
 
-  // Handle volume slider change
-  const handleVolumeSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    handleVolumeChange(newVolume);
-  };
+
 
   // Handle keyboard shortcuts
   React.useEffect(() => {
@@ -109,7 +105,7 @@ export default function StickyAudioPlayer() {
   }
 
   return (
-    <div 
+    <div
       className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg"
       role="region"
       aria-label="Audio player"
@@ -119,7 +115,7 @@ export default function StickyAudioPlayer() {
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         {isPlaying ? `Playing ${currentMessage.title}` : `Paused ${currentMessage.title}`}
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex flex-col gap-4">
           {/* Top Section: Thumbnail and Message Info */}
@@ -127,7 +123,7 @@ export default function StickyAudioPlayer() {
             {/* Message Thumbnail */}
             <div className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
               <Image
-                src={currentMessage.image}
+                src={currentMessage.thumbnail}
                 alt={`${currentMessage.title} thumbnail`}
                 fill
                 sizes="(max-width: 768px) 80px, 96px"

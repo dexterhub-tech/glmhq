@@ -15,6 +15,14 @@ export interface Message {
   audioUrl: string;
 }
 
+interface ApiAudio {
+  title?: string;
+  createdAt: string;
+  thumbnail?: string;
+  fileId?: string;
+  driveLink?: string;
+}
+
 // Context type definition
 export interface AudioPlayerContextType {
   messages: Message[];
@@ -71,7 +79,7 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
         const audios = await res.json();
 
         if (audios.length > 0) {
-          const mappedMessages: Message[] = audios.map((audio: any, index: number) => ({
+          const mappedMessages: Message[] = audios.map((audio: ApiAudio, index: number) => ({
             id: index + 1, // Generate a numeric ID
             title: audio.title || 'Untitled',
             preacher: 'Apostle Joseph Ibrahim', // Default preacher as it's not in API
@@ -159,6 +167,7 @@ export function AudioPlayerProvider({ children }: AudioPlayerProviderProps) {
       audio.pause();
       audio.src = '';
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Play a new message

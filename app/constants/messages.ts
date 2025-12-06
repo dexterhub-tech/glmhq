@@ -6,7 +6,8 @@ export const messages = [
     title: "Apostle Chant (Part 1)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "/Apostle_chants.mp3"
   },
   {
@@ -14,7 +15,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -22,7 +24,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -30,7 +33,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -38,7 +42,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -46,7 +51,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -54,7 +60,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -62,7 +69,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -70,7 +78,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -78,7 +87,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -86,7 +96,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -94,7 +105,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -102,7 +114,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -110,7 +123,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -118,7 +132,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -126,7 +141,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 31st, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -134,7 +150,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 24th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
@@ -142,7 +159,8 @@ export const messages = [
     title: "Overcoming Discouragement (Part 2)",
     preacher: "Apostle Joseph Ibrahim",
     date: "Aug 17th, '25",
-    image: healingMeetingImg,
+    thumbnail: healingMeetingImg,
+    driveLink: undefined,
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   }
 ];
